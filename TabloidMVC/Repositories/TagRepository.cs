@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using TabloidMVC.Models;
 
@@ -53,8 +54,8 @@ namespace TabloidMVC.Repositories
                             Name = reader.GetString(reader.GetOrdinal("Name"))
 
                         });
-
                     }
+                    tags = tags.OrderBy(tag => tag.Name).ToList();
                     reader.Close();
                     return tags;
                 }
