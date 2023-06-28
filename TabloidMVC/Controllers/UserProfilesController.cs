@@ -24,10 +24,15 @@ namespace TabloidMVC.Controllers
             var userProfile = _userProfileRepository.GetUserProfile();
             return View(userProfile);
         }
-        public IActionResult Details(int id)
+        
+        public ActionResult Details(int id)
         {
-            var user = _userProfileRepository.GetUserById(id);
-            return View(user);
+             UserProfile userProfile = _userProfileRepository.GetUserById(id);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+            return View(userProfile);
         }
 
 
