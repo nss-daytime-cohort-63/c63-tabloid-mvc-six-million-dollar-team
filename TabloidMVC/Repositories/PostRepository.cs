@@ -221,7 +221,9 @@ namespace TabloidMVC.Repositories
                     cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
                     cmd.Parameters.AddWithValue("@categoryId", post.CategoryId);
                     cmd.Parameters.AddWithValue("@userProfileId", post.UserProfileId);
+                    cmd.Parameters.AddWithValue("@isApproved", true);
                     cmd.Parameters.AddWithValue("@id", post.Id); 
+
 
                     cmd.ExecuteNonQuery();
                 }
