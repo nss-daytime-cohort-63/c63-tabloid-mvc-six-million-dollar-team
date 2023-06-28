@@ -66,7 +66,7 @@ namespace TabloidMVC.Repositories
                                up.CreateDateTime, up.ImageLocation, up.UserTypeId,
                                ut.[Name] AS UserTypeName
                         FROM UserProfile up
-                        LEFT JOIN UserType ut ON u.UserTypeId = ut.Id
+                        LEFT JOIN UserType ut ON up.UserTypeId = ut.Id
                         ORDER BY up.DisplayName ASC";
 
                     var reader = cmd.ExecuteReader();
