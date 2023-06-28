@@ -21,7 +21,6 @@ namespace TabloidMVC.Controllers
             _postRepository = postRepository;
             _categoryRepository = categoryRepository;
             // user profile repository 
-            
         }
 
         public IActionResult Index()
@@ -90,7 +89,6 @@ namespace TabloidMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public IActionResult Edit(int id, Post post)
         {
             try
@@ -104,8 +102,6 @@ namespace TabloidMVC.Controllers
             }
         }
 
-      
-
         public IActionResult Delete(int id, Post post)
         {
             try
@@ -116,7 +112,6 @@ namespace TabloidMVC.Controllers
             catch (Exception ex)
             {
                 return View(post);
-
             }
            
         }
