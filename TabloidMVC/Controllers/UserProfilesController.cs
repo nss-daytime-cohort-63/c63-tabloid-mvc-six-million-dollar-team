@@ -5,6 +5,7 @@ using System.Data;
 using TabloidMVC.Models;
 using System.Security.Claims;
 using TabloidMVC.Repositories;
+using System;
 
 namespace TabloidMVC.Controllers
 {
@@ -27,14 +28,12 @@ namespace TabloidMVC.Controllers
         
         public ActionResult Details(int id)
         {
-             UserProfile userProfile = _userProfileRepository.GetUserById(id);
-            if (userProfile == null)
+             UserProfile user = _userProfileRepository.GetUserById(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(userProfile);
+            return View(user);
         }
-
-
     }
 }
