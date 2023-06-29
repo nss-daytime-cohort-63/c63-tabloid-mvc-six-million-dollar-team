@@ -43,14 +43,14 @@ namespace TabloidMVC.Controllers
             }
             return View(post);
         }
-
+        // GET
         public IActionResult Create()
         {
             var vm = new PostCreateViewModel();
             vm.CategoryOptions = _categoryRepository.GetAll();
             return View(vm);
         }
-
+        // Post tags
         [HttpPost]
         public IActionResult Create(PostCreateViewModel vm)
         {
