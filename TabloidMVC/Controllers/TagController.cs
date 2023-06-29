@@ -5,50 +5,63 @@ using System.Collections.Generic;
 using TabloidMVC.Models;
 using TabloidMVC.Repositories;
 using System;
+
+
 namespace TabloidMVC.Controllers
 {
     [Authorize]
     public class TagController : Controller
     {
         private readonly ITagRepository _tagRepository;
+        private readonly IPostRepository _postRepository;
         
-        public TagController(ITagRepository tagRepository)
+
+
+        public TagController(ITagRepository tagRepository,)
         {
-            _tagRepository = tagRepository;
            
-        }
+
         // GET: Tags
         public ActionResult Index()
         {
             List<Tag> tags = _tagRepository.GetAllTags();
-            return View(tags);
+            
+            return View(tags);  
         }
+
+   
+
         // GET: Tags/Create
         public ActionResult Create()
         {
-           return View();
+
+        
+           
+                return View();
+           
         }
+
         // POST: Tags/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Tag tag)
+         public ActionResult Create()
         {
             try
             {
                 _tagRepository.AddTag(tag);
-
-                return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch
             {
-                return View(tag);
+                
             }
         }
+
         // GET: Tags/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
+
         // POST: Tags/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -63,11 +76,13 @@ namespace TabloidMVC.Controllers
                 return View();
             }
         }
+
         // GET: Tags/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
+
         // POST: Tags/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
