@@ -219,9 +219,9 @@ namespace TabloidMVC.Repositories
                     cmd.Parameters.AddWithValue("@imageLocation", post.ImageLocation);
                     cmd.Parameters.AddWithValue("@createDateTime", post.CreateDateTime);
                     cmd.Parameters.AddWithValue("@publishDateTime", post.PublishDateTime);
+                    cmd.Parameters.AddWithValue("@isApproved", post.IsApproved);
                     cmd.Parameters.AddWithValue("@categoryId", post.CategoryId);
                     cmd.Parameters.AddWithValue("@userProfileId", post.UserProfileId);
-                    cmd.Parameters.AddWithValue("@isApproved", post.IsApproved);
                     cmd.Parameters.AddWithValue("@id", post.Id);
 
                     cmd.ExecuteNonQuery();
