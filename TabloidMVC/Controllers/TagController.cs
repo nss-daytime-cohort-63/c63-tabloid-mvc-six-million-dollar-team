@@ -68,7 +68,8 @@ namespace TabloidMVC.Controllers
         // GET: Tags/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Tag tag = _tagRepository.GetTagById(id);
+            return View(tag);
         }
         // POST: Tags/Delete/5
         [HttpPost]
