@@ -6,6 +6,10 @@ using TabloidMVC.Models;
 using TabloidMVC.Repositories;
 using System;
 using Microsoft.Extensions.Hosting;
+using Microsoft.CodeAnalysis.Differencing;
+using Newtonsoft.Json.Linq;
+using static System.Collections.Specialized.BitVector32;
+using System.Reflection;
 
 namespace TabloidMVC.Controllers
 {
@@ -49,20 +53,22 @@ namespace TabloidMVC.Controllers
         // GET: Tags/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Tag tag = _tagRepository.GetTagById(id);
+            return View(tag);
         }
         // POST: Tags/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Tag tag)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _tagRepository.UpdateTag(tag);
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(tag);
             }
         }
         // GET: Tags/Delete/5
@@ -88,3 +94,7 @@ namespace TabloidMVC.Controllers
         }
     }
 }
+
+
+
+
