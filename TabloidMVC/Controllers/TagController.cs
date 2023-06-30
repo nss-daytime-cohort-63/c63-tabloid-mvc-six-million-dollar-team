@@ -5,17 +5,19 @@ using System.Collections.Generic;
 using TabloidMVC.Models;
 using TabloidMVC.Repositories;
 using System;
+using Microsoft.Extensions.Hosting;
+
 namespace TabloidMVC.Controllers
 {
     [Authorize]
     public class TagController : Controller
     {
         private readonly ITagRepository _tagRepository;
-        
+
         public TagController(ITagRepository tagRepository)
         {
             _tagRepository = tagRepository;
-           
+
         }
         // GET: Tags
         public ActionResult Index()
@@ -26,7 +28,7 @@ namespace TabloidMVC.Controllers
         // GET: Tags/Create
         public ActionResult Create()
         {
-           return View();
+            return View();
         }
         // POST: Tags/Create
         [HttpPost]
@@ -66,20 +68,22 @@ namespace TabloidMVC.Controllers
         // GET: Tags/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Tag tag = _tagRepository.GetTagById(id);
+            return View(tag);
         }
         // POST: Tags/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Tag tag)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _tagRepository.DeleteTag(id);
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(tag);
             }
         }
     }
