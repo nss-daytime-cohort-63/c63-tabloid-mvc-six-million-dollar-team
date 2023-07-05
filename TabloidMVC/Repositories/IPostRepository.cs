@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TabloidMVC.Models;
+using TabloidMVC.Models.ViewModels;
 
 namespace TabloidMVC.Repositories
 {
@@ -11,7 +12,7 @@ namespace TabloidMVC.Repositories
         Post GetUserPostById(int id, int userProfileId);
 
         void UpdatePost(Post post);
-
+       
         void DeletePost(int id);
     }
 }

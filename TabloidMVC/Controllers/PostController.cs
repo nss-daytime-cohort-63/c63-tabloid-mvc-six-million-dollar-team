@@ -59,11 +59,13 @@ namespace TabloidMVC.Controllers
                 vm.Post.CreateDateTime = DateAndTime.Now;
                 vm.Post.IsApproved = true;
                 vm.Post.UserProfileId = GetCurrentUserProfileId();
+                vm.Category = vm.Post.Category;
+                vm.CategoryOptions = _categoryRepository.GetAll();
 
                 _postRepository.Add(vm.Post);
 
                 return RedirectToAction("Details", new { id = vm.Post.Id });
-            } 
+            }
             catch
             {
                 vm.CategoryOptions = _categoryRepository.GetAll();
@@ -113,7 +115,7 @@ namespace TabloidMVC.Controllers
             {
                 return View(post);
             }
-           
+
         }
 
         // filter posts by category
