@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
+using System;
 using System.Security.Claims;
+using TabloidMVC.Models;
 using TabloidMVC.Models.ViewModels;
 using TabloidMVC.Repositories;
 
@@ -18,6 +20,7 @@ namespace TabloidMVC.Controllers
         {
             _postRepository = postRepository;
             _categoryRepository = categoryRepository;
+            // user profile repository 
         }
 
         public IActionResult Index()
@@ -40,14 +43,14 @@ namespace TabloidMVC.Controllers
             }
             return View(post);
         }
-
+        // GET
         public IActionResult Create()
         {
             var vm = new PostCreateViewModel();
             vm.CategoryOptions = _categoryRepository.GetAll();
             return View(vm);
         }
-
+        // Post tags
         [HttpPost]
         public IActionResult Create(PostCreateViewModel vm)
         {
@@ -73,5 +76,52 @@ namespace TabloidMVC.Controllers
             string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return int.Parse(id);
         }
+        // get: postcontroller / edit id
+        public IActionResult Edit(int id)
+        {
+            Post post = _postRepository.GetPublishedPostById(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return View(post);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Post post)
+        {
+            try
+            {
+                _postRepository.UpdatePost(post);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(post);
+            }
+        }
+
+        public IActionResult Delete(int id, Post post)
+        {
+            try
+            {
+                _postRepository.DeletePost(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(post);
+            }
+           
+        }
+
+        // filter posts by category
+
+        // filter posts by user
+
+        // filter posts by length of read
+
+
     }
 }
