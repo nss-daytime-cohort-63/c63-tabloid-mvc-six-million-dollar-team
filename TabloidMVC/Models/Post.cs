@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -17,13 +18,12 @@ namespace TabloidMVC.Models
         [DisplayName("Header Image URL")]
         public string ImageLocation { get; set; }
 
+        [DisplayName("Date Created")]
         public DateTime CreateDateTime { get; set; }
 
         [DisplayName("Published")]
         [DataType(DataType.Date)]
         public DateTime? PublishDateTime { get; set; }
-
-        public bool IsApproved { get; set; }
 
         [Required]
         [DisplayName("Category")]
@@ -33,5 +33,7 @@ namespace TabloidMVC.Models
         [DisplayName("Author")]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
+
+        public bool IsApproved { get; set; }
     }
 }
